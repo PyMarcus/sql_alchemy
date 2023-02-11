@@ -4,5 +4,8 @@ from entities import Movies
 
 if __name__ == '__main__':
     with DatabaseConnectionHandler() as db:
-        for lines in db.session.query(Movies).all():
-            print(lines)
+        try:
+            for lines in db.session.query(Movies).all():
+                print(lines)
+        except Exception as e:
+            db.session.rollback()
